@@ -38,13 +38,13 @@ async function getSearchData(title) {
 				const  {imdbID, Title, imdbRating, Runtime, Genre, Plot, Poster} = val;
 				const filmObj = {imdbID, Title, imdbRating, Runtime, Genre, Plot, Poster};
 				fetchedData.push(filmObj);
-				if(fetchedData.length === 1) {
-					mainContent.innerHTML = renderFilm(filmObj);
-				} else {
-					mainContent.innerHTML += renderFilm(filmObj);
-				}
 			} catch (e) {
 				console.error(e)
+			}
+		if(fetchedData.length){
+			mainContent.innerHTML = "";
+			for(let el of fetchedData){
+				mainContent.innerHTML += renderFilm(el);
 			}
 		}
 	} catch(e) {
