@@ -87,12 +87,13 @@ header {
 
 .search-input {
 	flex: 1;
+	width: 0;
 	background-color: transparent;
 	border: 0;
 	font-size: 1em;
 	color: #A5A5A5;
-	padding-left: 1em;
 }
+
 .search-input:focus {
 	outline: 0;
 }
@@ -228,5 +229,13 @@ hr {
 @media (max-width: 550px) {
 	:root{
 		--max-width: 90%;
+		font-size: 0.9rem;
+	}
+	
+	.srch-btn {
+		display: none;
+	}
+	.search-input {
+		padding-left: 1em;
 	}
 }
