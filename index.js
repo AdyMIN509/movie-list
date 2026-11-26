@@ -1,4 +1,5 @@
 import { testData } from "./data.js";
+import { renderFilm } from "./utils.js";
 
 // API
 const APIKey = '5cf89770';
@@ -12,6 +13,7 @@ let localStorageData = [];
 const mainContent = document.getElementById('main-content')
 const form = document.getElementById('form');
 const myWatchListBtn = document.getElementById('myWatchList-btn');
+const addBtn = document.getElementById('add-btn');
 
 // Functions
 async function getSearchData(title) {
@@ -50,32 +52,6 @@ async function getSearchData(title) {
 	}
 }
 
-function renderFilm(film) {
-	return `
-		 <section class="film" id='${film.imdbID}'>
-			<img src="${film.Poster}" class="poster">
-			<div class="film-info">
-				<div class="title-rating">
-					<h2 class="title">${film.Title}</h2>
-					<p class="rating"><img src="./assets/star-icon.svg"/>${film.imdbRating}</p>
-				</div>
-				<div class="additional-info">
-					<p class="duration">${film.Runtime}</p>
-					<p class="type">${film.Genre}</p>
-					<button type="button" class="watch-btn" data-id='${film.imdbID}' data-status=true>
-						<img src="./assets/plus-icon.svg" data-id='${film.imdbID}' alt="" class="watchlist-svg">
-						Watchlist
-					</button>
-				</div>
-				<p class="description">
-					${film.Plot}
-				</p>
-			</div>
-		 </section>
-		 <hr>
-	`
-}
-
 function handleSubmit(e) {
 	e.preventDefault();
 
@@ -101,16 +77,16 @@ function handleWatchListClick(e) {
 			localStorageData = localStorageData.filter(el=>el.imdbID !== val);
 		}
 		e.target.dataset.status = status === 'false' ? 'true' : 'false';
-		document.querySelector(`img[data-id='${val}']`).classList.toggle('active')
-		console.log(localStorageData)
+		document.querySelector(`img[data-id='${val}']`).classList.toggle('active');
 	}
 }
 
 function handleMyWatchListClick() {
-	localStorage.setItem('movie-data', JSON.stringify(localStorageData))
+	localStorage.setItem('movie-data', JSON.stringify(localStorageData));
+	window.location.href = './movieList.html';
 }
 
 // Event listener
 form.addEventListener('submit', handleSubmit);
 mainContent.addEventListener('click', handleWatchListClick);
-myWatchListBtn.addEventListener('click', handleMyWatchListClick)
+myWatchListBtn.addEventListener('click', handleMyWatchListClick);
