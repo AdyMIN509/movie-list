@@ -34,7 +34,7 @@ async function getSearchData(title) {
 				
 				const res = await fetch(`${BASEURL}&plot=short&i=${film.imdbID}`);
 				const val = await res.json();
-				if(!val.Response) continue;
+				if(val.Response === 'False') continue;
 				const  {imdbID, Title, imdbRating, Runtime, Genre, Plot, Poster} = val;
 				const filmObj = {imdbID, Title, imdbRating, Runtime, Genre, Plot, Poster};
 				fetchedData.push(filmObj);
