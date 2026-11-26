@@ -1,0 +1,131 @@
+@import url(https://fonts.googleapis.com/css?family=Inter:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic);
+
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	font-family: Inter, sans-serif;
+}
+
+
+body {
+	background-color:#121212;
+	color: white;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	height: 100dvh;
+	gap: 4em;
+}
+
+header {
+	background: url('./assets/bg-img.png');
+	background-color: rgba(0, 0, 0, 0.6);
+	background-size: cover;
+	background-position: 0% 20%;
+	background-blend-mode: multiply;
+	height: 208px;
+	width: 100%;
+	display: flex;
+	position: relative;
+	justify-content: center;
+}
+
+.top, .bottom {
+	max-width: 462px;
+	width: 100%;
+	display: flex;
+	align-items: center;
+}
+
+.top {
+	justify-content: space-between;
+}
+
+.top > .main-title {
+	font-size: 2.5rem;
+	font-weight: bold;
+}
+
+.top > .header-btn {
+	background-color: transparent;
+	color: white;
+	font-size: 0.875rem;
+	font-weight: bold;
+	border: 0;
+	cursor: pointer;
+	padding: 0.5em 1em;
+}
+
+
+.bottom {
+	position: absolute;
+	bottom: -10%;
+	left: 50%;
+	align-items: stretch;
+	transform: translateX(-50%);
+	justify-content: center;
+	width: 100%;
+	min-width: 462px;
+	background-color: #2E2E2F;
+	border-radius: 4px;
+	overflow: hidden;
+}
+
+.src-btn {
+	padding: 0.7em 2em;
+	border: 0;
+	color: white;
+	background-color: #4B4B4B;
+	cursor: pointer;
+	font-size: 1em;
+}
+
+.search-input {
+	flex: 1;
+	background-color: transparent;
+	border: 0;
+	font-size: 1em;
+	color: #A5A5A5;
+	padding-left: 1em;
+}
+.search-input:focus {
+	outline: 0;
+}
+
+.srch-btn {
+	padding: 0.7em;
+	cursor: pointer;
+}
+
+
+/* Main content */
+
+.main-content {
+	flex: 1;
+	position: relative;
+	max-width: 462px;
+	width: 100%;
+}
+
+.default-content {
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	top: 50%;
+	left: 50%;
+	gap: 1em;
+	transform: translate(-50%, -50%);
+}
+
+.default-img {
+	width: 80%;
+}
+
+.defaul-p {
+	color: #2E2E2F;
+	font-size: 1.5em;
+	font-weight: 700;
+	line-height: 20px;
+}
