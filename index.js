@@ -29,6 +29,8 @@ async function getSearchData(title) {
 		const out = data.Search;
 		fetchedData = [];
 
+		mainContent.innerHTML = '';
+
 		for (let film of out) {
 			try {
 				
@@ -38,13 +40,9 @@ async function getSearchData(title) {
 				const  {imdbID, Title, imdbRating, Runtime, Genre, Plot, Poster} = val;
 				const filmObj = {imdbID, Title, imdbRating, Runtime, Genre, Plot, Poster};
 				fetchedData.push(filmObj);
+				mainContent.innerHTML += renderFilm(film);
 			} catch (e) {
 				console.error(e)
-			}
-		if(fetchedData.length){
-			mainContent.innerHTML = "";
-			for(let el of fetchedData){
-				mainContent.innerHTML += renderFilm(el);
 			}
 		}
 	} catch(e) {
