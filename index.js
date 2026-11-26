@@ -11,6 +11,7 @@ let localStorageData = [];
 // DOM element
 const mainContent = document.getElementById('main-content')
 const form = document.getElementById('form');
+const myWatchListBtn = document.getElementById('myWatchList-btn');
 
 // Functions
 async function getSearchData(title) {
@@ -33,7 +34,6 @@ async function getSearchData(title) {
 				
 				const res = await fetch(`${BASEURL}&plot=short&i=${film.imdbID}`);
 				const val = await res.json();
-				console.log(val.Response);
 				if(!val.Response) continue;
 				const  {imdbID, Title, imdbRating, Runtime, Genre, Plot, Poster} = val;
 				const filmObj = {imdbID, Title, imdbRating, Runtime, Genre, Plot, Poster};
@@ -64,7 +64,7 @@ function renderFilm(film) {
 				<div class="additional-info">
 					<p class="duration">${film.Runtime}</p>
 					<p class="type">${film.Genre}</p>
-					<button type="button" class="watch-btn" data-id='${film.imdbID}'>
+					<button type="button" class="watch-btn" data-id='${film.imdbID}' data-status=true>
 						<img src="./assets/plus-icon.svg" data-id='${film.imdbID}' alt="" class="watchlist-svg">
 						Watchlist
 					</button>
@@ -87,21 +87,32 @@ function handleSubmit(e) {
 
 function handleWatchListClick(e) {
 	const val = e.target.dataset.id;
+	const status = e.target.dataset.status;
 	if(val) {
-		const filmObj = fetchedData.filter(el=>el.imdbID === val)[0];
-		if(localStorageData.length > 0) {
-			const IdList = localStorageData.map(el=>el.imdbID);
-			if(!IdList.includes(val)) {
-				console.log('Added!')
+		if(status === 'true'){
+			const filmObj = fetchedData.filter(el=>el.imdbID === val)[0];
+			if(localStorageData.length > 0) {
+				const IdList = localStorageData.map(el=>el.imdbID);
+				if(!IdList.includes(val)) {
+					localStorageData.push(filmObj);
+				}
+			} else {
 				localStorageData.push(filmObj);
 			}
 		} else {
-			localStorageData.push(filmObj);
-			console.log("Added!")
+			localStorageData = localStorageData.filter(el=>el.imdbID !== val);
 		}
+		e.target.dataset.status = status === 'false' ? 'true' : 'false';
+		document.querySelector(`img[data-id='${val}']`).classList.toggle('active')
+		console.log(localStorageData)
 	}
+}
+
+function handleMyWatchListClick() {
+	localStorage.setItem('movie-data', JSON.stringify(localStorageData))
 }
 
 // Event listener
 form.addEventListener('submit', handleSubmit);
-mainContent.addEventListener('click', handleWatchListClick)
+mainContent.addEventListener('click', handleWatchListClick);
+myWatchListBtn.addEventListener('click', handleMyWatchListClick)

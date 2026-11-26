@@ -71,7 +71,6 @@ header {
 	transform: translateX(-50%);
 	justify-content: center;
 	width: 100%;
-	min-width: 462px;
 	background-color: #2E2E2F;
 	border-radius: 4px;
 	overflow: hidden;
@@ -205,7 +204,14 @@ header {
 
 .watchlist-svg {
 	height: 1rem;
+	transform: rotate(0deg);
+	transition: .3s ease;
 }
+
+.watchlist-svg.active {
+	transform: rotate(-45deg);
+}
+
 
 .description {
 	font-size: 0.875rem;
@@ -217,4 +223,10 @@ hr {
 	animation: slideIn ease both;
 	animation-timeline: view();
 	animation-range: cover 0dvh cover 50dvh;
+}
+
+@media (max-width: 550px) {
+	:root{
+		--max-width: 90%;
+	}
 }
