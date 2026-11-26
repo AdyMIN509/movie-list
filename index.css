@@ -7,6 +7,9 @@
 	font-family: Inter, sans-serif;
 }
 
+:root {
+	--max-width: 400px;
+}
 
 body {
 	background-color:#121212;
@@ -16,6 +19,7 @@ body {
 	flex-direction: column;
 	height: 100dvh;
 	gap: 4em;
+	overflow-y: scroll;
 }
 
 header {
@@ -26,6 +30,7 @@ header {
 	background-blend-mode: multiply;
 	height: 208px;
 	width: 100%;
+	min-height: 208px;
 	display: flex;
 	position: relative;
 	justify-content: center;
@@ -102,21 +107,20 @@ header {
 /* Main content */
 
 .main-content {
-	flex: 1;
 	position: relative;
 	max-width: 462px;
 	width: 100%;
+	gap: 1em;
+	display: flex;
+	flex-direction: column;
 }
 
 .default-content {
-	position: absolute;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	top: 50%;
-	left: 50%;
 	gap: 1em;
-	transform: translate(-50%, -50%);
+	margin: auto;
 }
 
 .default-img {
@@ -128,4 +132,89 @@ header {
 	font-size: 1.5em;
 	font-weight: 700;
 	line-height: 20px;
+}
+
+/* Film */
+.film {
+	display: flex;
+	width: 100%;
+	transform: translateY(100px) scale(0.8);
+	filter: blur(10px);
+	align-items: center;
+	animation: slideIn ease both;
+	animation-timeline: view();
+	animation-range: cover 0dvh cover 50dvh;
+}
+
+@keyframes slideIn {
+	0% {
+		transform: translateY(100px) scale(0.8);
+		filter: blur(10px);
+	}
+	100% {
+		transform: translateY(0) scale(1);
+		filter: blur(0px);
+	}
+}
+
+.poster {
+	max-width: 100px;
+	width: 100%;
+}
+
+.film-info {
+	padding: 1.5em;
+	display: flex;
+	flex-direction: column;
+}
+
+.title-rating {
+	display: flex;
+	align-items: center;
+	gap: 0.5em	;
+}
+
+.title {
+	font-size: 1.125em;
+	font-weight: 500;
+}
+
+.rating {
+	display: flex;
+	align-items: center;
+	gap: 0.5em;
+}
+
+.additional-info {
+	display: flex;
+	gap: 0.5em;
+	font-size: 0.75rem;
+	align-items: center;
+}
+
+.watch-btn {
+	background-color: transparent;
+	color: white;
+	padding: 0.5em 1em;
+	display: flex;
+	gap: 0.5em;
+	align-items: center;
+	border: 0;
+	cursor: pointer;
+}
+
+.watchlist-svg {
+	height: 1rem;
+}
+
+.description {
+	font-size: 0.875rem;
+	color: #A5A5A5;
+}
+
+hr {
+	border: 1px solid #2C2C2C;
+	animation: slideIn ease both;
+	animation-timeline: view();
+	animation-range: cover 0dvh cover 50dvh;
 }
