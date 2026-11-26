@@ -2,7 +2,7 @@ import { testData } from "./data.js";
 
 // API
 const APIKey = '5cf89770';
-const BASEURL= `http://www.omdbapi.com/?apikey=${APIKey}`;
+const BASEURL= `https://www.omdbapi.com/?apikey=${APIKey}`;
 
 // Global variable
 let fetchedData = [];
