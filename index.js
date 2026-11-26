@@ -65,7 +65,7 @@ function renderFilm(film) {
 					<p class="duration">${film.Runtime}</p>
 					<p class="type">${film.Genre}</p>
 					<button type="button" class="watch-btn" data-id='${film.imdbID}'>
-						<img src="./assets/plus-icon.svg" alt="" class="watchlist-svg">
+						<img src="./assets/plus-icon.svg" data-id='${film.imdbID}' alt="" class="watchlist-svg">
 						Watchlist
 					</button>
 				</div>
@@ -85,5 +85,23 @@ function handleSubmit(e) {
 	getSearchData(formData.get('search-value'));
 }
 
+function handleWatchListClick(e) {
+	const val = e.target.dataset.id;
+	if(val) {
+		const filmObj = fetchedData.filter(el=>el.imdbID === val)[0];
+		if(localStorageData.length > 0) {
+			const IdList = localStorageData.map(el=>el.imdbID);
+			if(!IdList.includes(val)) {
+				console.log('Added!')
+				localStorageData.push(filmObj);
+			}
+		} else {
+			localStorageData.push(filmObj);
+			console.log("Added!")
+		}
+	}
+}
+
 // Event listener
-form.addEventListener('submit', handleSubmit)
+form.addEventListener('submit', handleSubmit);
+mainContent.addEventListener('click', handleWatchListClick)
