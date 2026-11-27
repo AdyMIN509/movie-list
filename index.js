@@ -32,20 +32,26 @@ async function getSearchData(title) {
 		mainContent.innerHTML = '';
 
 		for (let film of out) {
-			try {
-				
-				const res = await fetch(`${BASEURL}&plot=short&i=${film.imdbID}`);
-				const val = await res.json();
-				if(val.Response === 'False') continue;
-				const  {imdbID, Title, imdbRating, Runtime, Genre, Plot, Poster} = val;
-				const filmObj = {imdbID, Title, imdbRating, Runtime, Genre, Plot, Poster};
-				fetchedData.push(filmObj);
-				mainContent.innerHTML += renderFilm(film, localStorageData);
-			} catch (e) {
-				console.error(e)
-			}
+			const res = await fetch(`${BASEURL}&plot=short&i=${film.imdbID}`);
+			const val = await res.json();
+			if(val.Response === 'False') continue;
+			const  {imdbID, Title, imdbRating, Runtime, Genre, Plot, Poster} = val;
+			const filmObj = {imdbID, Title, imdbRating, Runtime, Genre, Plot, Poster};
+			fetchedData.push(filmObj);
+			mainContent.innerHTML += renderFilm(film, localStorageData);
 		}
 	} catch(e) {
+		mainContent.innerHTML = `
+			<p class="defaul-p">Unable to find what you’re looking for. Please try another search.</p>
+		`
+		setTimeout(() => {
+			mainContent.innerHTML = `
+				<div class="default-content">
+					<img src="./assets/default-icon.svg" alt="" class="default-img">
+					<p class="defaul-p">Start exploring</p>
+				</div>
+			`
+		}, 4000);
 		console.error(e)
 	}
 }
