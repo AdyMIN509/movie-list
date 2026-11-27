@@ -65,7 +65,7 @@ function handleWatchListClick(e) {
 		if(isInFilmObject(localStorageData, val)) {
 			localStorageData = localStorageData.filter(el => el.imdbID !== val);
 		} else {
-			localStorageData.push(filmObj)
+			localStorageData.unshift(filmObj)
 		};
 		imgElement.classList.toggle('active');
 	}
