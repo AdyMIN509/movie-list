@@ -13,7 +13,7 @@ export function renderFilm(film, lsStorage = []) {
 				<div class="additional-info">
 					<p class="duration">${film.Runtime}</p>
 					<p class="type">${film.Genre}</p>
-					<button type="button" class="watch-btn" data-id='${film.imdbID}' data-status=true>
+					<button type="button" class="watch-btn" data-id='${film.imdbID}'>
 						<img src="./assets/plus-icon.svg" data-id='${film.imdbID}' alt="" class="watchlist-svg ${addClass}">
 						Watchlist
 					</button>
@@ -25,6 +25,10 @@ export function renderFilm(film, lsStorage = []) {
 		 </section>
 		 <hr>
 	`
+}
+
+export function isInFilmObject(filmObjList,id) {
+	return filmObjList.map(el=>el.imdbID).includes(id);
 }
 
 export function renderLoFilm(films, lsStorage = []) {

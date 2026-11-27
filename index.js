@@ -1,5 +1,4 @@
-import { testData } from "./data.js";
-import { renderFilm } from "./utils.js";
+import { isInFilmObject, renderFilm } from "./utils.js";
 
 // API
 const APIKey = '5cf89770';
@@ -7,13 +6,12 @@ const BASEURL= `https://www.omdbapi.com/?apikey=${APIKey}`;
 
 // Global variable
 let fetchedData = [];
-let localStorageData = [];
+let localStorageData = JSON.parse(localStorage.getItem('movie-data')) || [];
 
 // DOM element
 const mainContent = document.getElementById('main-content')
 const form = document.getElementById('form');
 const myWatchListBtn = document.getElementById('myWatchList-btn');
-const addBtn = document.getElementById('add-btn');
 
 // Functions
 async function getSearchData(title) {
@@ -42,7 +40,7 @@ async function getSearchData(title) {
 				const  {imdbID, Title, imdbRating, Runtime, Genre, Plot, Poster} = val;
 				const filmObj = {imdbID, Title, imdbRating, Runtime, Genre, Plot, Poster};
 				fetchedData.push(filmObj);
-				mainContent.innerHTML += renderFilm(film);
+				mainContent.innerHTML += renderFilm(film, localStorageData);
 			} catch (e) {
 				console.error(e)
 			}
@@ -61,23 +59,15 @@ function handleSubmit(e) {
 
 function handleWatchListClick(e) {
 	const val = e.target.dataset.id;
-	const status = e.target.dataset.status;
+	const imgElement = document.querySelector(`img[data-id='${val}']`);
 	if(val) {
-		if(status === 'true'){
-			const filmObj = fetchedData.filter(el=>el.imdbID === val)[0];
-			if(localStorageData.length > 0) {
-				const IdList = localStorageData.map(el=>el.imdbID);
-				if(!IdList.includes(val)) {
-					localStorageData.push(filmObj);
-				}
-			} else {
-				localStorageData.push(filmObj);
-			}
+		const filmObj = fetchedData.filter(el=>el.imdbID === val)[0];
+		if(isInFilmObject(localStorageData, val)) {
+			localStorageData = localStorageData.filter(el => el.imdbID !== val);
 		} else {
-			localStorageData = localStorageData.filter(el=>el.imdbID !== val);
-		}
-		e.target.dataset.status = status === 'false' ? 'true' : 'false';
-		document.querySelector(`img[data-id='${val}']`).classList.toggle('active');
+			localStorageData.push(filmObj)
+		};
+		imgElement.classList.toggle('active');
 	}
 }
 

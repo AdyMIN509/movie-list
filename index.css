@@ -121,6 +121,7 @@ header {
 	align-items: center;
 	gap: 1em;
 	margin: auto;
+	animation: slideIn 0.5 ease;
 }
 
 .default-img {
@@ -132,6 +133,7 @@ header {
 	font-size: 1.5em;
 	font-weight: 700;
 	line-height: 20px;
+	text-align: center;
 }
 
 /* Film */
@@ -201,12 +203,14 @@ header {
 	align-items: center;
 	border: 0;
 	cursor: pointer;
+	z-index: 1;
 }
 
 .watchlist-svg {
 	height: 1rem;
 	transform: rotate(0deg);
 	transition: .3s ease;
+	pointer-events: none;
 }
 
 .watchlist-svg.active {
@@ -238,4 +242,12 @@ hr {
 	.search-input {
 		padding-left: 1em;
 	}
+}
+
+.index-link {
+	display: flex;
+	gap: 1em;
+	font-size: 1em;
+	color: white;
+	text-decoration: none;
 }

@@ -10,16 +10,18 @@
 	<header>
 		<div class="top">
 			<h1 class="main-title">My Watchlist</h1>
-			<button type="button" id="myWatchList-btn" class="header-btn">Search for movies</button>
+			<button type="button" id="searchMovie-btn" class="header-btn">Search for movies</button>
 		</div>
 	</header>
 	<main id="main-content" class="main-content">
 		<!-- Default content -->
-		 <div class="default-content">
+		 <div class="default-content" id="watchlist-nav">
 			<p class="defaul-p">Your watchlist is looking a little empty...</p>
-			<button type="button" class="watch-btn" id="add-btn">
-				<img src="./assets/plus-icon.svg" alt="" class="watchlist-svg">
-				Let’s add some movies!
+			<button type="button" class="watch-btn" id="search-btn">
+				<a href="./index.html" class="index-link">
+					<img src="./assets/plus-icon.svg" alt="" class="watchlist-svg">
+					Let’s add some movies!
+				</a>
 			</button>
 		 </div>
 		<!-- Default content -->
